@@ -10,4 +10,4 @@ jobs:
       - name: log env var
         env:
           SOME_TEXT: "this is test "
-        run: echo "$SOME_TEST"
+        run: echo "${SOME_TEST}"
