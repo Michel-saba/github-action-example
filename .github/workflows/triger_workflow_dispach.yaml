@@ -1,5 +1,6 @@
 name:  testing
-run-name: ${{ github.actor }} is learning GitHub Actions, Deploy to ${{ inputs.deploy_target }}
+run-name: ${{ github.actor }} is learning GitHub Actions # 
+# github context : https://docs.github.com/en/actions/learn-github-actions/contexts
 
 on:  workflow_dispatch 
 
