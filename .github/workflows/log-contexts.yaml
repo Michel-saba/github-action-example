@@ -1,5 +1,14 @@
 name: Context testing
-on: workflow_dispatch
+# on: [push , workflow_dispatch ]
+on: [ workflow_dispatch ]
+
+
+
+permissions:
+  contents: read # This permission is needed to read the workflow file.
+  checks: write # This permission is needed to update the check status.
+  id-token: write # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+
 
 jobs:
   dump_contexts_to_log:
