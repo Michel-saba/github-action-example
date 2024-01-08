@@ -1,8 +1,6 @@
 name: Context testing
-on: 
-  push:
-    branches: [test*]
-  workflow_dispatch:
+on: [push , workflow_dispatch ]
+
 
 
 permissions:
