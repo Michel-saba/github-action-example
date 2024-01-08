@@ -1,0 +1,22 @@
+name: Named jobs
+
+on: [ workflow_dispatch ]
+
+jobs:
+  my_first_job:
+    name: My first job # Use jobs.<job_id>.name to set a name for the job, which is displayed in the GitHub UI.
+    runs-on: [self-hosted, linux, x64, gpu] # define the type of machine to run the job on.
+
+  my_second_job:
+    name: My second job
+       runs-on: ubuntu-latest # Example: Specifying an operating system
+       
+# In this example, job1 must complete successfully before job2 begins, and job3 waits for both job1 and job2 to complete.
+  job1:
+  job2:
+    needs: job1 # It can be a string or array of strings.
+  job3:
+    needs: [job1, job2]
+  job4: # uses the always() conditional expression so that it always runs after job1 and job2 have completed, regardless of whether they were successful. 
+    if:  ${{ always() }} 
+    needs: [job1, job2]
