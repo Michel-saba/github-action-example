@@ -1,0 +1,23 @@
+name: workflow for node.js CI
+# Events that trigger workflows
+on:
+  workflow_dispatch
+  
+
+
+jobs:
+  build_job:
+     runs-on: ubuntu-latest
+     strategy:
+       matrix:
+         node-version: [14.x, 16.x, 18.x, 20.xx] 
+     steps:
+     - uses: actions/checkout@v4 # This action checks-out your repository under $GITHUB_WORKSPACE. https://github.com/actions/checkout
+     - name: Use Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v4  # https://github.com/actions/setup-node
+       with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+     - run: npm ci
+     - run: npm run build --if-present
+     - run: npm test
