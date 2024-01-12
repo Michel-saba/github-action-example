@@ -25,22 +25,27 @@ jobs:
   # continuous integrations
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x, 20.x]
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
-      - name: Use Node.js 20.x
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm ci  
+        run: npm install
+      - name: Generate build
+        run: npm run build 
       - name: run unit test
         run: npm test
-
-      - name: Generate build
-        run: npm run build --production
+      - name: Run the tests and generate coverage report
+        run: npm test -- --coverage
   # Deployment CD
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
