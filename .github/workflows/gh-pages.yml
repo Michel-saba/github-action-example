@@ -41,8 +41,7 @@ jobs:
         run: npm run build 
       - name: run unit test
         run: npm test
-      - name: Run the tests and generate coverage report
-        run: npm test -- --coverage
+
   # Deployment CD
   deploy:
     needs: build
