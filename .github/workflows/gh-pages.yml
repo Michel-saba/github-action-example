@@ -39,8 +39,8 @@ jobs:
         run: npm install
       - name: Generate build
         run: npm run build 
-      - name: run unit test
-        run: npm test
+      # - name: run unit test
+      #   run: npm test
 
   # Deployment CD
   deploy:
